@@ -1,0 +1,415 @@
+---
+import { getCollection } from 'astro:content';
+
+// Layout import
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Component Imports
+import CallToAction from '../components/CallToAction.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import Hero from '../components/Hero.astro';
+import Icon from '../components/Icon.astro';
+import Pill from '../components/Pill.astro';
+import Skills from '../components/Skills.astro';
+import { Image } from 'astro:assets';
+import { formatDate } from '../utils/date';
+
+// Content Fetching
+const posts = (await getCollection('posts'))
+	.filter((post) => post.data.featured)
+	.sort(
+		(a, b) =>
+			Math.floor(new Date(b.data.pubDatetime).getTime() / 1000) -
+			Math.floor(new Date(a.data.pubDatetime).getTime() / 1000)
+	);
+
+const projects = [
+    {
+      title: 'Amon Agent',
+      description: 'Amon 是一个基于 Claude Agent SDK + Electron 构建的桌面 Agent 应用',
+      link: 'https://github.com/liruifengv/amon-agent'
+    },
+	{
+		title: 'astro-cn.com',
+		description: 'Astro 中文网站 Showcase。展示一些使用 Astro 构建的中文网站！',
+		link: 'https://github.com/liruifengv/astro-cn.com',
+	},
+];
+---
+
+<BaseLayout>
+	<div class="page-wrapper">
+		<!-- Hero Section with Blob Background -->
+		<section class="hero-section">
+			<div class="wrapper">
+				<div class="hero-grid">
+					<Hero title="liruifengv" tagline="Web 开发者，Astro 项目成员，开源爱好者。" align="start">
+						<div class="hero-roles">
+							<Pill><Icon icon="code" size="1.2em" />Developer</Pill>
+							<Pill variant="secondary"><Icon icon="pencil-line" size="1.2em" />Writer</Pill>
+						</div>
+					</Hero>
+
+					<div class="hero-image-wrapper">
+						<Image
+							src="https://bucket.liruifengv.com/avatar-new.png"
+							alt="liruifengv's avatar"
+							width={400}
+							height={400}
+							class="hero-image"
+						/>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Skills Section -->
+		<section class="skills-section wrapper">
+			<Skills />
+		</section>
+
+		<!-- Featured Posts Section -->
+		<section class="section-wrapper">
+			<div class="wrapper">
+				<div class="section-card">
+					<div class="section-header">
+						<div class="section-title-group">
+							<h2 class="section-title">精选文章</h2>
+							<p class="section-description">这里是我最近写的一些文章，感兴趣的话可以看看！</p>
+						</div>
+						<CallToAction href="/posts/" variant="outline">
+							查看全部
+							<Icon icon="arrow-right" size="1.2em" />
+						</CallToAction>
+					</div>
+
+					<ul class="posts-list">
+						{
+							posts.map((post) => (
+								<li class="post-item">
+									<a href={`/posts/${post.slug}`} class="post-link">
+										<span class="post-title">{post.data.title}</span>
+										<span class="post-date">{formatDate(post.data.pubDatetime)}</span>
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- Projects Section -->
+		<section class="section-wrapper">
+			<div class="wrapper">
+				<div class="section-header">
+					<div class="section-title-group">
+						<h2 class="section-title">最近项目</h2>
+					</div>
+					<CallToAction href="/projects/" variant="outline">
+						查看全部
+						<Icon icon="arrow-right" size="1.2em" />
+					</CallToAction>
+				</div>
+
+				<div class="projects-grid">
+					{
+						projects.map((project, index) => (
+							<a
+								href={project.link}
+								class="project-card"
+								target="_blank"
+								rel="noopener noreferrer"
+								style={`--card-radius-variant: ${index % 3}`}
+							>
+								<h3 class="project-title">{project.title}</h3>
+								<p class="project-description">{project.description}</p>
+								<span class="project-arrow">
+									<Icon icon="arrow-right" size="1.2em" />
+								</span>
+							</a>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- Contact CTA -->
+		<ContactCTA />
+	</div>
+</BaseLayout>
+
+<style>
+	.page-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 4rem;
+	}
+
+	/* Hero Section */
+	.hero-section {
+		position: relative;
+		overflow: hidden;
+		padding-block: 2rem;
+	}
+
+	.hero-blobs {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		z-index: -1;
+	}
+
+	.hero-grid {
+		display: flex;
+		flex-direction: column-reverse;
+		align-items: center;
+		gap: 1.5rem;
+	}
+
+	.hero-roles {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-top: 1rem;
+	}
+
+	.hero-image-wrapper {
+		position: relative;
+	}
+
+	.hero-image {
+		width: 160px;
+		height: 160px;
+		object-fit: cover;
+		border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+		border: 4px solid var(--background);
+		box-shadow: var(--shadow-lg);
+		transition: transform var(--theme-transition);
+	}
+
+	.hero-image:hover {
+		transform: rotate(-2deg) scale(1.02);
+	}
+
+	@media (min-width: 50em) {
+		.hero-section {
+			padding-block: 3rem;
+		}
+
+		.hero-grid {
+			display: grid;
+			grid-template-columns: 1fr auto;
+			gap: 3rem;
+			align-items: center;
+			max-width: 56rem;
+			margin: 0 auto;
+		}
+
+		.hero-image {
+			width: 240px;
+			height: 240px;
+		}
+	}
+
+	/* Skills Section */
+	.skills-section {
+		padding-block: 2rem;
+	}
+
+	/* Section Wrapper */
+	.section-wrapper {
+		padding-block: 2rem;
+	}
+
+	/* Section Card */
+	.section-card {
+		background: rgba(254, 250, 250, 0.6);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-2xl);
+		padding: 2rem;
+		box-shadow: var(--shadow-sm);
+	}
+
+	:global(.theme-dark) .section-card {
+		background: rgba(42, 38, 32, 0.4);
+	}
+
+	/* Section Header */
+	.section-header {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		margin-bottom: 2rem;
+	}
+
+	.section-title-group {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.section-title {
+		font-family: var(--font-brand);
+		font-size: var(--text-2xl);
+		font-weight: 700;
+		color: var(--foreground);
+	}
+
+	.section-description {
+		color: var(--muted-foreground);
+		font-size: var(--text-base);
+	}
+
+	@media (min-width: 50em) {
+		.section-header {
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: flex-start;
+		}
+
+		.section-card {
+			padding: 3rem;
+		}
+	}
+
+	/* Posts List */
+	.posts-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.post-item {
+		border-radius: var(--radius-lg);
+		transition: background var(--hover-transition);
+	}
+
+	.post-item:hover {
+		background: var(--muted);
+	}
+
+	.post-link {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+		padding: 1rem;
+		text-decoration: none;
+	}
+
+	.post-title {
+		color: var(--foreground);
+		font-weight: 500;
+		font-size: var(--text-base);
+		transition: color var(--hover-transition);
+	}
+
+	.post-item:hover .post-title {
+		color: var(--primary);
+	}
+
+	.post-date {
+		color: var(--muted-foreground);
+		font-size: var(--text-sm);
+	}
+
+	@media (min-width: 50em) {
+		.post-link {
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.post-title {
+			font-size: var(--text-lg);
+		}
+	}
+
+	/* Projects Grid */
+	.projects-grid {
+		display: grid;
+		gap: 1.5rem;
+		margin-top: 2rem;
+	}
+
+	.project-card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		padding: 1.5rem;
+		background: var(--muted);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-2xl);
+		text-decoration: none;
+		transition: all var(--theme-transition);
+		overflow: hidden;
+	}
+
+	/* Asymmetric border radius variants */
+	.project-card[style*='--card-radius-variant: 0'] {
+		border-radius: var(--radius-3xl) var(--radius-lg) var(--radius-2xl) var(--radius-lg);
+	}
+
+	.project-card[style*='--card-radius-variant: 1'] {
+		border-radius: var(--radius-lg) var(--radius-2xl) var(--radius-lg) var(--radius-3xl);
+	}
+
+	.project-card[style*='--card-radius-variant: 2'] {
+		border-radius: var(--radius-2xl) var(--radius-lg) var(--radius-3xl) var(--radius-lg);
+	}
+
+	.project-card:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--shadow-lg);
+		border-color: var(--primary);
+	}
+
+	.project-title {
+		font-family: var(--font-brand);
+		font-size: var(--text-xl);
+		font-weight: 600;
+		color: var(--foreground);
+		transition: color var(--hover-transition);
+	}
+
+	.project-card:hover .project-title {
+		color: var(--primary);
+	}
+
+	.project-description {
+		color: var(--muted-foreground);
+		font-size: var(--text-base);
+		line-height: 1.6;
+	}
+
+	.project-arrow {
+		position: absolute;
+		bottom: 1.5rem;
+		right: 1.5rem;
+		color: var(--muted-foreground);
+		opacity: 0;
+		transform: translateX(-10px);
+		transition: all var(--hover-transition);
+	}
+
+	.project-card:hover .project-arrow {
+		opacity: 1;
+		transform: translateX(0);
+		color: var(--primary);
+	}
+
+	@media (min-width: 50em) {
+		.projects-grid {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 2rem;
+		}
+
+		.project-card {
+			padding: 2rem;
+		}
+	}
+</style>

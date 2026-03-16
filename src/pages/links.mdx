@@ -1,0 +1,70 @@
+---
+layout: ../layouts/BaseLayout.astro
+title: "友链"
+---
+
+import LinkItem from '@components/LinkItem.astro';
+import PageHeader from '@components/PageHeader.astro';
+import { links } from '../links';
+
+<div class="wrapper">
+  <PageHeader title="友链" description="海内存知己，天涯若比邻" />
+  <section class="links-grid">
+    {links.map((link) => (
+      <LinkItem name={link.name} href={link.href} logo={link.logo} description={link.description} />
+    ))}
+  </section>
+</div>
+
+<div class="wrapper add-link-section">
+  <h2 class="add-link-title">添加我的友链</h2>
+  <p class="add-link-desc">你可以将我的友链添加到你的网站中。</p>
+
+```json
+{
+  "name": "liruifengv",
+  "href": "https://liruifengv.com",
+  "logo": "https://bucket.liruifengv.com/avatar.jpg",
+  "description": "Web 开发者，Astro 项目成员，开源爱好者。"
+}
+```
+
+</div>
+
+<style>{`
+  .links-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .links-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .links-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .add-link-section {
+    margin-top: 3rem;
+    padding-bottom: 2rem;
+  }
+
+  .add-link-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .add-link-desc {
+    text-align: center;
+    color: var(--muted-foreground);
+    margin-bottom: 1rem;
+  }
+`}</style>

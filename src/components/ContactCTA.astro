@@ -1,0 +1,91 @@
+---
+import CallToAction from './CallToAction.astro';
+import Icon from './Icon.astro';
+---
+
+<aside class="contact-cta">
+	<div class="wrapper">
+		<div class="cta-card">
+			<div class="cta-icon">
+				<Icon icon="paper-plane-tilt" size="2rem" color="var(--primary-foreground)" />
+			</div>
+			<div class="cta-content">
+				<h2 class="cta-title">很高兴见到你！</h2>
+				<p class="cta-description">有任何问题或想法，欢迎随时联系我交流</p>
+			</div>
+			<CallToAction href="/about/" variant="primary">
+				联系我
+				<Icon icon="arrow-right" size="1.2em" />
+			</CallToAction>
+		</div>
+	</div>
+</aside>
+
+<style>
+	.contact-cta {
+		padding: 3rem 0;
+	}
+
+	.cta-card {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1.5rem;
+		padding: 2.5rem 2rem;
+		background: var(--muted);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-2xl);
+		text-align: center;
+	}
+
+	.cta-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 4rem;
+		height: 4rem;
+		background: var(--primary);
+		border-radius: var(--radius-xl);
+		color: var(--primary-foreground);
+	}
+
+	.cta-content {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.cta-title {
+		font-family: var(--font-brand);
+		font-size: var(--text-xl);
+		font-weight: 700;
+		color: var(--foreground);
+	}
+
+	.cta-description {
+		font-size: var(--text-base);
+		color: var(--muted-foreground);
+		line-height: 1.5;
+	}
+
+	@media (min-width: 50em) {
+		.contact-cta {
+			padding: 4rem 0;
+		}
+
+		.cta-card {
+			flex-direction: row;
+			justify-content: space-between;
+			padding: 3rem;
+			text-align: left;
+		}
+
+		.cta-content {
+			flex: 1;
+		}
+
+		.cta-title {
+			font-size: var(--text-2xl);
+		}
+	}
+</style>

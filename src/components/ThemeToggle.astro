@@ -1,0 +1,105 @@
+---
+import Icon from './Icon.astro';
+---
+
+<theme-toggle>
+	<button aria-label="Toggle theme">
+		<span class="sr-only">Toggle dark/light theme</span>
+		<span class="icon light"><Icon icon="sun" /></span>
+		<span class="icon dark"><Icon icon="moon-stars" /></span>
+	</button>
+</theme-toggle>
+
+<style>
+	button {
+		display: flex;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-full);
+		padding: 0;
+		background: var(--muted);
+		cursor: pointer;
+		transition: all var(--hover-transition);
+	}
+
+	button:hover {
+		border-color: var(--primary);
+	}
+
+	.icon {
+		z-index: 1;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.5rem;
+		width: 2rem;
+		height: 2rem;
+		font-size: 1rem;
+		color: var(--muted-foreground);
+		transition: color var(--hover-transition);
+	}
+
+	.icon.light::before {
+		content: '';
+		z-index: -1;
+		position: absolute;
+		width: calc(2rem - 4px);
+		height: calc(2rem - 4px);
+		top: 2px;
+		left: 2px;
+		background: var(--primary);
+		border-radius: var(--radius-full);
+		transition: transform var(--theme-transition);
+	}
+
+	:global(.theme-dark) .icon.light::before {
+		transform: translateX(2rem);
+	}
+
+	/* Active icon colors */
+	:global(html:not(.theme-dark)) .icon.light {
+		color: var(--primary-foreground);
+	}
+
+	:global(.theme-dark) .icon.dark {
+		color: var(--primary-foreground);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.icon,
+		.icon.light::before {
+			transition: none;
+		}
+	}
+
+	@media (forced-colors: active) {
+		.icon.light::before {
+			background-color: SelectedItem;
+		}
+	}
+</style>
+
+<script>
+	class ThemeToggle extends HTMLElement {
+		constructor() {
+			super();
+
+			const button = this.querySelector('button')!;
+
+			const setTheme = (dark: boolean) => {
+				document.documentElement.classList[dark ? 'add' : 'remove']('theme-dark');
+				button.setAttribute('aria-pressed', String(dark));
+				document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+				localStorage.setItem('theme', dark ? 'dark' : 'light');
+			};
+
+			button.addEventListener('click', () => setTheme(!this.isDark()));
+			setTheme(this.isDark());
+		}
+
+		isDark() {
+			return document.documentElement.classList.contains('theme-dark');
+		}
+	}
+	customElements.define('theme-toggle', ThemeToggle);
+</script>
