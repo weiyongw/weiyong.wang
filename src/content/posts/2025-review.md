@@ -1,7 +1,7 @@
 ---
-title: "2025年度回顾"
-description: "唯庸的 2025 年度回顾"
-pubDatetime: 2025-12-31
+title: 2025年度回顾
+description: 唯庸的 2025 年度回顾
+pubDatetime: 2026-01-01
 author: 唯庸
 featured: true
 draft: false
