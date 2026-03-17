@@ -21,3 +21,11 @@ pnpm-debug.log*
 .DS_Store
 
 wechat_drafts
+
+# Obsidian files
+.obsidian/
+.claude/
+
+# Templates and drafts
+src/content/posts/templates/
+src/content/posts/content/
