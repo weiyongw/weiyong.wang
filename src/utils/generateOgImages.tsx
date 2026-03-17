@@ -3,23 +3,14 @@ import { Resvg } from "@resvg/resvg-js";
 import { type CollectionEntry } from "astro:content";
 import postOgImage from "./og-templates/post";
 import siteOgImage from "./og-templates/site";
-import { SITE, OG } from "@config";
+import { OG } from "@config";
 import { getIconCode, loadEmoji } from "./twemoji";
+import fs from "node:fs";
+import path from "node:path";
 
-const isDev = import.meta.env.DEV;
-const website = isDev ? "http://localhost:4321/" : SITE.website;
-
-const fetchFonts = async () => {
-  // Regular Font
-  const fontFileRegular = await fetch(
-    `${website}fonts/NotoSansSC/static/NotoSansSC-Regular.ttf`
-  );
-  const fontRegular: ArrayBuffer = await fontFileRegular.arrayBuffer();
-
-  return { fontRegular };
-};
-
-const { fontRegular } = await fetchFonts();
+const fontRegular = fs.readFileSync(
+  path.resolve("public/fonts/NotoSansSC/static/NotoSansSC-Regular.ttf")
+);
 
 const options: SatoriOptions = {
   width: 1200,
