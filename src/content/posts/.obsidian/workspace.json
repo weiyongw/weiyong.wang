@@ -27,7 +27,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/content-template 1.md",
+                "file": "draft/content-template 1.md",
                 "mode": "source",
                 "source": false
               },
@@ -214,9 +214,9 @@
   "lastOpenFiles": [
     "2025-review.md",
     "templates/content-template.md",
-    "content/content-template 1.md",
+    "draft/content-template 1.md",
     "未命名.md",
-    "content",
+    "draft",
     "templates/未命名.md",
     "未命名 1.md",
     "templates"
