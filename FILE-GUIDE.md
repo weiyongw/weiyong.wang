@@ -26,7 +26,7 @@
 | `src/components/Footer.astro` | 页脚 |
 | `src/components/Hero.astro` | 首页主标题区 |
 | `src/components/ContactCTA.astro` | 联系 CTA |
-| `src/components/Skills.astro` | 技能展示 |
+| `src/components/Skills.astro` | 技能展示（文本直接写在文件第 9-25 行的 `skills` 数组里，每项包含 icon、title、description） |
 | `src/components/CallToAction.astro` | 行动号召按钮 |
 | `src/components/PageHeader.astro` | 页面标题头 |
 
