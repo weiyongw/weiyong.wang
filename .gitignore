@@ -23,8 +23,8 @@ pnpm-debug.log*
 wechat_drafts
 
 # Obsidian files in posts folder
-posts/**/.obsidian
-posts/**/.claude
+src/content/posts/.obsidian/
+src/content/posts/.claude/
 
 # Templates and drafts                                                                               
 src/content/posts/templates/                                                                         
