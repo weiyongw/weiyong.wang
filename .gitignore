@@ -28,4 +28,4 @@ posts/**/.claude
 
 # Templates and drafts                                                                               
 src/content/posts/templates/                                                                         
-src/content/posts/content/
+src/content/posts/draft/
