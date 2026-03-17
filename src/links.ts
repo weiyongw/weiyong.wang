@@ -8,9 +8,9 @@ export interface Link {
 
 export const links: Link[] = [
   {
-    name: "示例友链",
-    href: "https://example.com",
-    logo: "https://via.placeholder.com/64",
-    description: "这是一个示例友链",
+    name: "weiyong",
+    href: "https://weiyong.wang",
+    logo: "https://weiyong-note.oss-cn-beijing.aliyuncs.com/weiyong.wang/avatar.jpg",
+    description: "唯庸的个人网站。AI Agent 布道者，分享 AI、产品、效率等内容。",
   },
 ];

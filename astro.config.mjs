@@ -5,6 +5,7 @@ import sitemap from "@astrojs/sitemap";
 import { SITE } from "./src/config";
 import expressiveCode from "astro-expressive-code";
 import mdx from "@astrojs/mdx";
+import rehypeSlug from 'rehype-slug';
 import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs';
 
 // https://astro.build/config
@@ -60,6 +61,7 @@ export default defineConfig({
       wrap: false
     },
     remarkPlugins: [remarkReadingTime],
+    rehypePlugins: [rehypeSlug],
   },
   vite: {
     optimizeDeps: {

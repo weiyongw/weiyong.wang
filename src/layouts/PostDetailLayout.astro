@@ -4,6 +4,7 @@ import { type CollectionEntry, getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactCTA from '../components/ContactCTA.astro';
 import Tag from '../components/Tag.astro';
+import TableOfContents from '../components/TableOfContents.astro';
 import Comments from "@components/Comment";
 import { formatDate } from "@utils/date.ts";
 
@@ -23,7 +24,7 @@ const { post } = Astro.props;
 
 const { title, author, description, ogImage, canonicalURL, pubDatetime, tags } = post.data;
 
-const { Content, remarkPluginFrontmatter } = await post.render();
+const { Content, headings, remarkPluginFrontmatter } = await post.render();
 
 const { readingTime, words } = remarkPluginFrontmatter;
 
@@ -32,7 +33,7 @@ const ogUrl = new URL(ogImageUrl ?? `/posts/${post.slug}.png`, Astro.url.origin)
 ---
 
 <BaseLayout
-	title={title + ' | ' + 'liruifengv'}
+	title={title + ' | ' + '唯庸'}
 	author={author}
 	description={description}
 	ogImage={ogUrl}
@@ -63,22 +64,35 @@ const ogUrl = new URL(ogImageUrl ?? `/posts/${post.slug}.png`, Astro.url.origin)
 		<!-- Article Content -->
 		<main class="post-content">
 			<div class="wrapper">
-				<article
-					id="article"
-					role="article"
-					class="article-body prose prose-lg dark:prose-invert max-w-3xl mx-auto"
-				>
-					<Content />
+				<div class="content-layout">
+					<!-- TOC Sidebar (desktop only, sticky left) -->
+					<aside class="toc-sidebar">
+						<div class="toc-sticky">
+							<TableOfContents headings={headings} />
+						</div>
+					</aside>
 
-					<!-- Author CTA -->
-					<div class="author-cta">
-						<p class="welcome-text">感谢阅读！欢迎交流~</p>
-					</div>
+					<!-- Main Article -->
+					<article
+						id="article"
+						role="article"
+						class="article-body prose prose-lg dark:prose-invert"
+					>
+						<Content />
 
-					<Comments client:only="react" />
-				</article>
+						<!-- Author CTA -->
+						<div class="author-cta">
+							<p class="welcome-text">感谢阅读！欢迎交流~</p>
+						</div>
+
+						<Comments client:only="react" />
+					</article>
+				</div>
 			</div>
 		</main>
+
+		<!-- Mobile TOC (fixed elements, must be outside toc-sidebar to avoid display:none) -->
+		<TableOfContents headings={headings} mobile />
 
 		<ContactCTA />
 	</div>
@@ -138,9 +152,22 @@ const ogUrl = new URL(ogImageUrl ?? `/posts/${post.slug}.png`, Astro.url.origin)
 		padding: 3rem 0;
 	}
 
+	.content-layout {
+		display: flex;
+		flex-direction: column;
+		max-width: 48rem;
+		margin: 0 auto;
+	}
+
+	/* TOC sidebar - hidden on mobile */
+	.toc-sidebar {
+		display: none;
+	}
+
 	.article-body {
 		color: var(--muted-foreground);
 		line-height: 1.8;
+		min-width: 0;
 	}
 
 	.article-body :global(h1),
@@ -151,6 +178,7 @@ const ogUrl = new URL(ogImageUrl ?? `/posts/${post.slug}.png`, Astro.url.origin)
 		color: var(--foreground);
 		margin-top: 2.5rem;
 		margin-bottom: 1rem;
+		scroll-margin-top: 6rem;
 	}
 
 	.article-body :global(p) {
@@ -247,6 +275,32 @@ const ogUrl = new URL(ogImageUrl ?? `/posts/${post.slug}.png`, Astro.url.origin)
 
 		.post-content {
 			padding: 4rem 0;
+		}
+
+		.content-layout {
+			flex-direction: row;
+			gap: 2.5rem;
+			max-width: none;
+		}
+
+		.toc-sidebar {
+			display: block;
+			flex-shrink: 0;
+			width: 13rem;
+		}
+
+		.toc-sticky {
+			position: sticky;
+			top: 6rem;
+			max-height: calc(100vh - 8rem);
+			overflow-y: auto;
+			scrollbar-width: thin;
+		}
+
+		.article-body {
+			flex: 1;
+			min-width: 0;
+			max-width: 48rem;
 		}
 	}
 </style>
