@@ -20,6 +20,9 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# Claude Code local config
+.claude/
+
 wechat_drafts
 
 # Obsidian files in posts folder
