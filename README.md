@@ -1,34 +1,36 @@
-# [liruifengv.com](https://liruifengv.com)
+# [weiyong.wang](https://weiyong.wang)
 
-我的个人博客网站。[![Built with Astro](https://astro.badg.es/v1/built-with-astro/tiny.svg)](https://astro.build)
+唯庸的个人网站。[![Built with Astro](https://astro.badg.es/v1/built-with-astro/tiny.svg)](https://astro.build)
+
+AI Agent 布道者，分享 AI、产品、效率等内容。
 
 ## Features
 
-- [x] SSG 静态渲染， SEO 友好，极速渲染
-- [x] 生成站点地图( @astrojs/sitemap )
+- [x] SSG 静态渲染，SEO 友好，极速渲染
+- [x] 生成站点地图（@astrojs/sitemap）
 - [x] 优秀的 [Lighthouse](https://web.dev/measure/) 和 [PageSpeed Insights](https://pagespeed.web.dev/) 报告分数
 - [x] 支持 RSS 订阅
-- [x] 使用 tailwindcss 构建样式
+- [x] 使用 TailwindCSS 构建样式
 - [x] 移动端响应式布局
 - [x] 支持代码高亮
 - [x] 支持文章标签分类
 - [x] 支持按年归档
-- [x] 评论功能
 - [x] Markdown MDX 支持
-- [x] 草稿页面及分页
 - [x] 明亮/暗黑模式
-- [ ] 文章搜索
-
-## 得分
-
-![image](https://github.com/liruifengv/liruifengv.com/assets/25167721/bdf4eb29-12ff-4cd0-a6c4-febf6a671f05)
+- [x] Vercel Speed Insights
 
 ## 订阅
 
-你可以使用 RSS 订阅我的博客文章：https://liruifengv.com/rss.xml
+你可以使用 RSS 订阅我的博客文章：https://weiyong.wang/rss.xml
 
 [如何用 RSS 订阅？](https://zhuanlan.zhihu.com/p/55026716)
 
-## 📜 License
+## 联系方式
 
-Licensed under the MIT License, Copyright © 2023-present.
+- GitHub: [@weiyongw](https://github.com/weiyongw)
+- Twitter: [@weiyong_wang](https://x.com/weiyong_wang)
+- Email: weiyong_wang@163.com
+
+## License
+
+Licensed under the MIT License, Copyright © 2024-present.
