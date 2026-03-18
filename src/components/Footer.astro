@@ -1,6 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import { iconPaths } from './IconPaths';
+import avatarImg from '../assets/images/avatar.jpg';
 
 const currentYear = new Date().getFullYear();
 
@@ -29,7 +30,7 @@ const siteLinks = [
 			<div class="footer-brand">
 				<a href="/" class="brand-link">
 					<img
-						src="https://weiyong-note.oss-cn-beijing.aliyuncs.com/weiyong.wang/avatar.jpg"
+						src={avatarImg.src}
 						alt="唯庸"
 						class="brand-avatar"
 					/>

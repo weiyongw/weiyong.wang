@@ -7,6 +7,8 @@ import Tag from '../components/Tag.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import Comments from "@components/Comment";
 import { formatDate } from "@utils/date.ts";
+import { Image } from 'astro:assets';
+import authorBg from '../assets/images/author-bg.png';
 
 interface Props {
 	post: CollectionEntry<'posts'>;
@@ -83,6 +85,16 @@ const ogUrl = new URL(ogImageUrl ?? `/posts/${post.slug}.png`, Astro.url.origin)
 						<!-- Author CTA -->
 						<div class="author-cta">
 							<p class="welcome-text">感谢阅读！欢迎交流~</p>
+							<div class="author-info">
+								<p>唯庸的微信：<code>wangweiyong0219</code></p>
+								<p>关注公众号 <code>唯庸AI进化论</code>，阅读更多内容</p>
+								<p>扫码添加微信，朋友圈日常分享感悟与思考</p>
+							</div>
+							<Image
+								src={authorBg}
+								alt="唯庸公众号"
+								class="author-image"
+							/>
 						</div>
 
 						<Comments client:only="react" />
@@ -253,6 +265,33 @@ const ogUrl = new URL(ogImageUrl ?? `/posts/${post.slug}.png`, Astro.url.origin)
 		background: var(--background);
 	}
 
+	.author-image {
+		width: 100%;
+		height: auto;
+		margin: 1.5rem 0 0;
+		border-radius: var(--radius-lg);
+	}
+
+	.author-info {
+		margin-top: 1rem;
+		color: var(--muted-foreground);
+		font-size: var(--text-sm);
+		line-height: 1.8;
+		text-align: left;
+	}
+
+	.author-info p {
+		margin: 0.5rem 0;
+	}
+
+	.author-info code {
+		color: var(--primary);
+		font-weight: 600;
+		background: var(--background);
+		padding: 0.125rem 0.5rem;
+		border-radius: var(--radius-sm);
+	}
+
 	.qrcode {
 		height: 8rem;
 		width: auto;
@@ -262,6 +301,7 @@ const ogUrl = new URL(ogImageUrl ?? `/posts/${post.slug}.png`, Astro.url.origin)
 	.welcome-text {
 		color: var(--primary);
 		font-weight: 500;
+		margin-bottom: 0.5rem;
 	}
 
 	@media (min-width: 50em) {

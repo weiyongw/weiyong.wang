@@ -13,6 +13,7 @@ import Pill from '../components/Pill.astro';
 import Skills from '../components/Skills.astro';
 import { Image } from 'astro:assets';
 import { formatDate } from '../utils/date';
+import avatarImg from '../assets/images/avatar.jpg';
 
 // Content Fetching
 const posts = (await getCollection('posts'))
@@ -53,7 +54,7 @@ const projects = [
 
 					<div class="hero-image-wrapper">
 						<Image
-							src="https://weiyong-note.oss-cn-beijing.aliyuncs.com/weiyong.wang/avatar.jpg"
+							src={avatarImg}
 							alt="唯庸's avatar"
 							width={400}
 							height={400}

@@ -2,47 +2,123 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 
-const projects = [
+const services = [
   {
-    title: 'YoNote',
-    description: 'YoNote是一个高信息密度内容可视化 Agent',
-    link: 'https://yonote.net/'
+    title: '唯庸AI沉思录',
+    description: '唯庸的个人小群，分享日常思考',
+    link: 'https://www.weiyong.wang/posts/ai-meditations'
   },
   {
-    title: 'Agent101',
-    description: 'Agent 101网站分享唯庸写的一些智能体教程和智能体社群内容',
-    link: 'https://agent101.cn/'
+    title: 'AI 智能体社群',
+    description: '99元知识库,讲解最核心的 Agent 必会知识',
+    link: 'https://mp.weixin.qq.com/s/0GLN4dyjLOXEKmKaH7EMWQ'
   },
 ]
+
+// 状态类型: 'developing' | 'maintaining' | 'paused'
+const products = [
+  
+  {
+    title: 'Weiyong_Skills',
+    description: '唯庸的日常自用 skills',
+    link: 'https://github.com/weiyongw/Skills',
+    status: 'developing' as const
+  },
+  {
+    title: 'YoNote',
+    description: '高信息密度内容可视化 Agent，将复杂信息转化为直观的视觉呈现',
+    link: 'https://yonote.net/',
+    status: 'maintaining' as const
+  },
+  {
+    title: 'AI PAGE',
+    description: 'HTML 托管工具',
+    link: 'https://github.com/weiyongw/AI-PAGE',
+    status: 'paused' as const
+  },
+]
+
+const statusConfig = {
+  developing: { label: '开发中', color: 'orange' },
+  maintaining: { label: '维护中', color: 'green' },
+  paused: { label: '已暂停', color: 'gray' },
+}
 ---
 
-<BaseLayout title="我的项目 | 唯庸" description="我开发或维护的项目">
+<BaseLayout title="我的项目 | 唯庸" description="我提供的服务与开发的产品">
   <div class="wrapper">
-    <PageHeader title="项目" description="我开发或维护的项目" />
-    <section class="projects">
-      {projects.map(project => (
-        <a
-          class="project-card"
-          href={project.link}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 class="project-title">{project.title}</h2>
-          <p class="project-desc">{project.description}</p>
-        </a>
-      ))}
+    <PageHeader title="项目" description="我提供的服务与开发的产品" />
+
+    <section class="section">
+      <h2 class="section-title">服务</h2>
+      <p class="section-desc">我提供的咨询与社群服务</p>
+      <div class="cards">
+        {services.map(item => (
+          <a
+            class="card"
+            href={item.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h3 class="card-title">{item.title}</h3>
+            <p class="card-desc">{item.description}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">产品</h2>
+      <p class="section-desc">我开发或维护的产品</p>
+      <div class="cards">
+        {products.map(item => (
+          <a
+            class="card"
+            href={item.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="card-header">
+              <h3 class="card-title">{item.title}</h3>
+              <span class={`status status-${statusConfig[item.status].color}`}>
+                <span class="status-dot"></span>
+                {statusConfig[item.status].label}
+              </span>
+            </div>
+            <p class="card-desc">{item.description}</p>
+          </a>
+        ))}
+      </div>
     </section>
   </div>
 </BaseLayout>
 
 <style>
-  .projects {
+  .section {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .section-title {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--foreground);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .section-desc {
+    font-size: var(--text-sm);
+    color: var(--muted-foreground);
+    margin: 0 0 1.5rem 0;
+  }
+
+  .cards {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
   }
 
-  .project-card {
+  .card {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
@@ -53,20 +129,85 @@ const projects = [
     text-decoration: none;
     box-shadow: var(--shadow-sm);
     transition: all 0.3s ease-in-out;
+    text-align: left;
   }
 
-  .project-card:hover {
-    transform: scale(1.05);
+  .card:hover {
+    transform: scale(1.02);
+    border-color: var(--accent);
   }
 
-  .project-title {
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .card-title {
     font-size: var(--text-base);
     font-weight: 500;
     color: var(--foreground);
     margin: 0;
   }
 
-  .project-desc {
+  /* Status badge */
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+    white-space: nowrap;
+  }
+
+  .status-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .status-green {
+    background: rgba(34, 197, 94, 0.1);
+    color: #16a34a;
+  }
+  .status-green .status-dot {
+    background: #22c55e;
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+  }
+
+  .status-orange {
+    background: rgba(245, 158, 11, 0.1);
+    color: #d97706;
+  }
+  .status-orange .status-dot {
+    background: #f59e0b;
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
+  }
+
+  .status-gray {
+    background: rgba(156, 163, 175, 0.1);
+    color: #6b7280;
+  }
+  .status-gray .status-dot {
+    background: #9ca3af;
+    animation: none;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(0.85);
+    }
+  }
+
+  .card-desc {
     font-size: var(--text-sm);
     color: var(--muted-foreground);
     line-height: 1.5;
@@ -75,13 +216,13 @@ const projects = [
   }
 
   @media (min-width: 640px) {
-    .projects {
+    .cards {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
   @media (min-width: 1024px) {
-    .projects {
+    .cards {
       grid-template-columns: repeat(3, 1fr);
     }
   }
