@@ -54,6 +54,16 @@ const socialImageURL = new URL(ogImage ?? "og.png", Astro.url.origin).href;
       ><link rel="stylesheet" href="/fonts/OPPO_Sans_4/result.css" /></noscript
     >
 
+    <style>
+      @font-face {
+        font-family: 'LXGW WenKai';
+        src: url('/fonts/LxgwWenKai/LXGWWenKai-Medium.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -68,8 +78,6 @@ const socialImageURL = new URL(ogImage ?? "og.png", Astro.url.origin).href;
     <meta property="twitter:image" content={socialImageURL} />
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <script is:inline src="/toggle-theme.js"></script>
 

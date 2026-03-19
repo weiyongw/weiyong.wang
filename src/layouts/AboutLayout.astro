@@ -14,13 +14,44 @@ const { frontmatter } = Astro.props;
 <Layout title={`关于 | 唯庸`}>
 	<div class="stack gap-20">
 		<main class="wrapper stack gap-8 w-full">
-    <section
-      id="about"
-      class="mx-auto max-w-3xl prose-base dark:prose-invert prose-img:rounded-xl prose-li:list-disc mb-28 prose-a:underline prose-a:underline-offset-2 "
-    >
-      <h1 class="text-2xl tracking-wider sm:text-3xl text-center pt-8 pb-4">{frontmatter.title}</h1>
-      <slot />
-    </section>
-  </main>
-  </div>
+			<section
+				id="about"
+				class="mx-auto max-w-3xl prose-base dark:prose-invert prose-img:rounded-xl prose-li:list-disc mb-28 prose-a:underline prose-a:underline-offset-2"
+			>
+				<h1 class="text-2xl tracking-wider sm:text-3xl text-center pt-8 pb-4">{frontmatter.title}</h1>
+				<slot />
+			</section>
+		</main>
+	</div>
 </Layout>
+
+<style is:global>
+	.about-avatar {
+		float: right;
+		margin: 0 0 1rem 1.5rem;
+		border-radius: var(--radius-lg);
+		shape-outside: margin-box;
+	}
+
+	.about-intro {
+		overflow: hidden;
+	}
+
+	.about-intro ol {
+		padding-left: 1.5rem;
+		margin: 0;
+	}
+
+	.about-intro li {
+		margin-bottom: 0.5rem;
+		color: var(--muted-foreground);
+	}
+
+	@media (max-width: 30em) {
+		.about-avatar {
+			float: none;
+			display: block;
+			margin: 0 auto 1.5rem;
+		}
+	}
+</style>

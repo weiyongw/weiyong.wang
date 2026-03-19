@@ -3,8 +3,8 @@ import type { Site, SocialObjects, OG_Type } from "./types";
 export const SITE: Site = {
   website: "https://weiyong.wang/",
   author: "唯庸",
-  desc: "唯庸的个人网站。AI Agent 布道者，分享 AI、产品、效率等内容。",
-  title: "weiyong",
+  desc: "唯庸的个人博客。AI 产品经理、企业培训讲师、独立开发者，专注 AI Agent、产品设计与效率工具，分享前沿技术洞察与实践经验。",
+  title: "唯庸 · weiyong.wang",
   lightAndDarkMode: true,
   postPerPage: 10,
   avatar: "https://weiyong-note.oss-cn-beijing.aliyuncs.com/weiyong.wang/avatar.jpg",

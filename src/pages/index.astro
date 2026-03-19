@@ -26,14 +26,14 @@ const posts = (await getCollection('posts'))
 
 const projects = [
     {
-      title: 'YoNote',
-      description: 'YoNote是一个高信息密度内容可视化 Agent',
-      link: 'https://yonote.net/'
+      title: 'AI 智能体社群',
+      description: '99元知识库，讲解最核心的 Agent 必会知识',
+      link: 'https://mp.weixin.qq.com/s/0GLN4dyjLOXEKmKaH7EMWQ'
     },
 	{
-		title: 'Agent101',
-		description: 'Agent 101网站分享唯庸写的一些智能体教程和智能体社群内容',
-		link: 'https://agent101.cn/',
+		title: 'Weiyong Skills',
+		description: '唯庸的日常自用 Skills',
+		link: 'https://github.com/weiyongw/Skills',
 	},
 ];
 ---
@@ -184,14 +184,19 @@ const projects = [
 		width: 160px;
 		height: 160px;
 		object-fit: cover;
-		border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-		border: 4px solid var(--background);
-		box-shadow: var(--shadow-lg);
+		border-radius: 35% 65% 65% 35% / 35% 35% 65% 65%;
+		border: 5px solid #f5f3ef;
+		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
 		transition: transform var(--theme-transition);
 	}
 
 	.hero-image:hover {
 		transform: rotate(-2deg) scale(1.02);
+	}
+
+	:global(.theme-dark) .hero-image {
+		border-color: rgba(255, 255, 255, 0.15);
+		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.08);
 	}
 
 	@media (min-width: 50em) {

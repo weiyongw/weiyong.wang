@@ -12,8 +12,8 @@ interface Props {
 
 const { headings, mobile = false } = Astro.props;
 
-// Only keep h2 and h3
-const filteredHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
+// Keep h1, h2, h3, h4
+const filteredHeadings = headings.filter(h => h.depth >= 1 && h.depth <= 4);
 ---
 
 {filteredHeadings.length > 0 && !mobile && (
@@ -22,7 +22,7 @@ const filteredHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
     <h2 class="toc-title">目录</h2>
     <ul class="toc-list">
       {filteredHeadings.map(heading => (
-        <li class:list={["toc-item", { "toc-item-h3": heading.depth === 3 }]}>
+        <li class:list={["toc-item", `toc-item-h${heading.depth}`]}>
           <a href={`#${heading.slug}`} class="toc-link" data-slug={heading.slug}>
             {heading.text}
           </a>
@@ -54,7 +54,7 @@ const filteredHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
       </div>
       <ul class="toc-list toc-panel-list">
         {filteredHeadings.map(heading => (
-          <li class:list={["toc-item", { "toc-item-h3": heading.depth === 3 }]}>
+          <li class:list={["toc-item", `toc-item-h${heading.depth}`]}>
             <a href={`#${heading.slug}`} class="toc-link" data-slug={heading.slug}>
               {heading.text}
             </a>
@@ -186,8 +186,21 @@ const filteredHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
     margin: 0;
   }
 
+  .toc-item-h1 {
+    padding-left: 0;
+    font-weight: 600;
+  }
+
+  .toc-item-h2 {
+    padding-left: 0.5rem;
+  }
+
   .toc-item-h3 {
-    padding-left: 1rem;
+    padding-left: 1.25rem;
+  }
+
+  .toc-item-h4 {
+    padding-left: 2rem;
   }
 
   .toc-link {
